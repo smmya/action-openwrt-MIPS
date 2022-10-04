@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt
+name: Build OpenWrt MIPS
 
 on:
   repository_dispatch:
@@ -32,7 +32,7 @@ env:
   TZ: Asia/Shanghai
 
 jobs:
-  build:
+  new3:
     runs-on: ubuntu-20.04
 
     steps:
@@ -135,10 +135,8 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
+        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")-new3"
         touch release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
 
     - name: Upload firmware to release
@@ -253,10 +251,8 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
+        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")-R3G"
         touch release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
 
     - name: Upload firmware to release
